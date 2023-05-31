@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="844.0" prefWidth="1437.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.liufinalproject.SceneTwoControllerTruck">
+   <children>
+      <ImageView fitHeight="846.0" fitWidth="1437.0" layoutY="-1.0">
+         <image>
+            <Image url="@../../../truck-kun.jpeg" />
+         </image>
+      </ImageView>
+      <Rectangle arcWidth="5.0" height="222.0" layoutX="2.0" layoutY="626.0" opacity="0.83" stroke="#ffcb48" strokeType="INSIDE" strokeWidth="2.0" width="1435.0" />
+      <Label fx:id="dialogue" layoutX="95.0" layoutY="671.0" prefHeight="137.0" prefWidth="942.0" text="..." textFill="#ffcb47">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="1242.0" layoutY="786.0" text="Click anywhere to continue..." textFill="#ffc849">
+         <font>
+            <Font name="Times New Roman" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="nextButton" layoutX="-4.0" layoutY="2.0" mnemonicParsing="false" onAction="#nextDialogue" opacity="0.0" prefHeight="844.0" prefWidth="1437.0" text="Next" />
+      <Button fx:id="choice" layoutX="548.0" layoutY="239.0" mnemonicParsing="false" onAction="#choiceResponse" opacity="0.8" prefHeight="80.0" prefWidth="324.0" style="-fx-background-color: black;" text="Try to run" textAlignment="CENTER" textFill="#ffbf1c" visible="false">
+         <font>
+            <Font name="Times New Roman Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="choice2" layoutX="548.0" layoutY="369.0" mnemonicParsing="false" onAction="#choiceResponse" opacity="0.8" prefHeight="80.0" prefWidth="324.0" style="-fx-background-color: black;" text="Freeze" textFill="#ffbf1c" visible="false">
+         <font>
+            <Font name="Times New Roman Bold" size="13.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
