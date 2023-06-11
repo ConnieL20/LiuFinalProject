@@ -6,20 +6,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
-public class HomeController {
-    @FXML
-    Button startButton;
-    Stage stage;
-    Scene scene;
+public class DeathController {
 
-    public void switchToScene(ActionEvent event) throws IOException{
+    @FXML
+    private Label death;
+
+    @FXML
+    private Button restart;
+
+    private Stage stage;
+    private Scene scene;
+
+    public DeathController(){
+        death = new Label();
+        restart = new Button();
+    }
+    public void restartGame(ActionEvent e) throws IOException {
         //loads window
         FXMLLoader fxmlLoader = new FXMLLoader(HomeController.class.getResource("SceneOne.fxml"));
         //load the scene/window
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
         scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();

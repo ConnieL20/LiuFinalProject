@@ -11,8 +11,8 @@ public class GameRunner extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(GameRunner.class.getResource("HomePage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1102, 820);
-        stage.setTitle("Game: The Truth of Beauty");
+        Scene scene = new Scene(fxmlLoader.load(), 1437, 844);
+        stage.setTitle("The Truth of Beauty");
         stage.setScene(scene);
         stage.show();
     }

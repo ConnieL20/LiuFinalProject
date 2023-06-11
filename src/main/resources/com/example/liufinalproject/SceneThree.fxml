@@ -8,18 +8,17 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="844.0" prefWidth="1437.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.liufinalproject.SceneThreeController">
    <children>
-      <ImageView fitHeight="848.0" fitWidth="1438.0" layoutY="-4.0">
+      <ImageView fitHeight="966.0" fitWidth="1438.0" layoutY="-122.0">
          <image>
             <Image url="@../../../1961195.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcWidth="5.0" height="246.0" layoutX="1.0" layoutY="597.0" opacity="0.83" stroke="#ffcb48" strokeType="INSIDE" strokeWidth="2.0" width="1436.0" />
-      <Label fx:id="dialogue" layoutX="95.0" layoutY="658.0" prefHeight="137.0" prefWidth="942.0" text="..." textFill="#ffcb47">
+      <Rectangle fx:id="box" arcWidth="5.0" height="246.0" layoutX="1.0" layoutY="597.0" opacity="0.83" stroke="#ffcb48" strokeType="INSIDE" strokeWidth="2.0" width="1437.0" />
+      <Label fx:id="dialogue" layoutX="95.0" layoutY="658.0" prefHeight="137.0" prefWidth="1290.0" text="..." textFill="#ffcb47" wrapText="true">
          <font>
-            <Font name="Times New Roman" size="16.0" />
+            <Font name="Times New Roman" size="21.0" />
          </font>
       </Label>
       <Label layoutX="1221.0" layoutY="772.0" text="Click anywhere to continue..." textFill="#ffc849">

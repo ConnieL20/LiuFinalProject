@@ -7,8 +7,8 @@ public class SceneOneController extends SceneController {
         super();
         addDialogues();
         addIndexes();
-        decideWhichScene();
-        setHasDifferentScenes(true);
+        setNextFXML1("SceneTwo.fxml");
+        setNextFXML2("SceneTwoTruck.fxml");
         setDialogueResult1("I'm tired. Good night.");
         setDialogueResult2("Let's go to the supermarket and get some coffee.");
     }
@@ -24,16 +24,4 @@ public class SceneOneController extends SceneController {
         getNeedChoice().add(4);
     }
 
-    public void decideWhichScene(){
-        if (getSelectedChoice() == 1){
-            setNextFXML("SceneTwo.fxml");
-        } else {
-            setNextFXML("SceneTwoTruck.fxml");
-        }
-    }
-
-    @Override
-    public void decideWhichScenes() {
-
-    }
 }

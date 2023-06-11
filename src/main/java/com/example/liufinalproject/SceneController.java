@@ -8,39 +8,41 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class SceneController {
     //instance variables
     @FXML
     private Button nextButton;
-
+    @FXML
+    private Rectangle box;
     private String dialogueResult1;
     private String dialogueResult2;
     private int selectedChoice;
     @FXML
     private Label dialogue;
     @FXML
-    private DialogueCollection dialogueCollection;
+    private final DialogueCollection dialogueCollection;
     private Stage stage;
     private Scene scene;
     @FXML
     private Button choice;
     @FXML
     private Button choice2;
-    int penaltyPoints;
     private Character currentCharacter;
+    private DeathController deathController;
 
-    private boolean thereIsACharacter;
-    private boolean hasDifferentScenes;
     int counter;
     int needIdx;
     private ArrayList<Integer> needChoice;
     private String nextFXML;
+    private String nextFXML1;
+    private String nextFXML2;
 
     public SceneController(){
         //setting up the arrayList of dialogue in this scene
@@ -48,14 +50,15 @@ public abstract class SceneController {
         dialogueCollection = new DialogueCollection(testDialogue);
         dialogueResult1 = "This works";
         dialogueResult2 = "This works2";
+        dialogue = new Label();
+        box = new Rectangle();
         selectedChoice = 0;
         needChoice = new ArrayList<>();
         counter = 0;
-        penaltyPoints = 0;
-        thereIsACharacter = false;
-        hasDifferentScenes = false;
         currentCharacter = new Character();
-        nextFXML = "HomePage.fxml";
+        deathController = new DeathController();
+        nextFXML1 = "HomePage.fxml";
+        nextFXML2 = "Scene.fxml";
         choice = new Button();
         choice2 = new Button();
     }
@@ -65,33 +68,33 @@ public abstract class SceneController {
         return dialogueCollection;
     }
 
-    public void setDialogueCollection(DialogueCollection newCollection){
-        dialogueCollection = newCollection;
-    }
-
     public ArrayList<Integer> getNeedChoice(){
         return needChoice;
     }
 
-    public void setNeedChoice(ArrayList<Integer> newNeedChoice){
-        needChoice = newNeedChoice;
+    public Label getDialogue(){
+        return dialogue;
     }
 
-    public String getNextFXML(){
-        return nextFXML;
-    }
-
-    public void setNextFXML(String next){
-        nextFXML = next;
+    public Button getNextButton(){
+        return nextButton;
     }
 
     public Button getChoice(){
         return choice;
     }
+
     public Button getChoice2(){
         return choice2;
     }
 
+    public void setNextFXML1(String next){
+        nextFXML1 = next;
+    }
+
+    public void setNextFXML2(String next){
+        nextFXML2 = next;
+    }
 
     public void setDialogueResult1(String str){
         dialogueResult1 = str;
@@ -102,6 +105,9 @@ public abstract class SceneController {
         dialogueResult2 = str;
     }
 
+    public Character getCurrentCharacter(){
+        return currentCharacter;
+    }
     public String getDialogueResult1(){
         return dialogueResult1;
     }
@@ -118,27 +124,44 @@ public abstract class SceneController {
         selectedChoice = selected;
     }
 
-    public void setHasDifferentScenes(boolean differentScenes){
-        hasDifferentScenes = differentScenes;
+    public DeathController getDeathController(){
+        return deathController;
     }
 
+
+    /**
+     * @param e
+     * @throws IOException
+     *
+     * When the user clicks anywhere on the screen, the method will iterate through the dialogue collection and display
+     * the next piece of dialogue. It will check the index with the dialogue that is prompting the user to choose an
+     * option.
+     */
     public void nextDialogue(ActionEvent e) throws IOException{
+
         counter++;
         if (counter <= dialogueCollection.getLen()){
             dialogue.setText(dialogueCollection.getCollection().get(counter - 1));
+            decideColors();
             if (counter == needChoice.get(needIdx)){
                 nextButton.setDisable(true);
                 delay(500, () -> choice.setVisible(true));
                 delay(500, () -> choice2.setVisible(true));
             }
         } else {
-            calculateMeter();
-            if (hasDifferentScenes){
-                decideWhichScene();
-            }
+            decideWhichScenes();
             switchToHome(e);
         }
     }
+
+
+    /**
+     * @param e
+     * @throws IOException
+     *
+     * This method checks which button the user clicked on and helps decide which route the user will be on or the
+     * correct corresponding dialogue in response to that choice.
+     */
 
     public void choiceResponse(ActionEvent e) throws IOException{
         Button buttonChosen = ((Button) e.getSource());
@@ -148,36 +171,66 @@ public abstract class SceneController {
         } else {
             selectedChoice = 2;
             dialogueCollection.getCollection().add(dialogueResult2);
-            if (thereIsACharacter){
-                penaltyPoints += 25;
-            }
         }
         choice.setVisible(false);
         choice2.setVisible(false);
         nextButton.setDisable(false);
-    }
+        dialogue.setText(dialogueCollection.getCollection().get(dialogueCollection.getLen() - 1));
 
-    public void calculateMeter(){
-        if (penaltyPoints > 0){
-            currentCharacter.subtractMeter(penaltyPoints);
+        if (selectedChoice == 1){
+            dialogueCollection.getCollection().remove(dialogueResult1);
+        } else {
+            dialogueCollection.getCollection().remove(dialogueResult2);
         }
     }
+
+    public void decideColors(){
+        if (dialogue.getText().contains("**")){ //Bob
+            dialogue.setText(dialogue.getText().substring(2, dialogue.getText().length() - 2));
+            dialogue.setTextFill(Color.web("#8f8f8f"));
+            box.setStroke(Color.web("#8f8f8f"));
+        } else if (dialogue.getText().contains("##")){ //Vercingetorix
+            dialogue.setText(dialogue.getText().substring(2, dialogue.getText().length() - 2));
+            dialogue.setTextFill(Color.web("#66ffff"));
+            box.setStroke(Color.web("#66ffff"));
+        } else if (dialogue.getText().contains("@@")){ //Duke
+            dialogue.setText(dialogue.getText().substring(2, dialogue.getText().length() - 2));
+            dialogue.setTextFill(Color.web("#8d72b5"));
+            box.setStroke(Color.web("#8d72b5"));
+        } else if (dialogue.getText().contains("^^")){ //yandere
+            dialogue.setText(dialogue.getText().substring(2, dialogue.getText().length() - 2));
+            dialogue.setTextFill(Color.web("#4aa7ff"));
+            box.setStroke(Color.web("#4aa7ff"));
+        } else if (dialogue.getText().contains("&&")){ //forest spirit
+            dialogue.setText(dialogue.getText().substring(2, dialogue.getText().length() - 2));
+            dialogue.setTextFill(Color.web("#76f26b"));
+            box.setStroke(Color.web("#76f26b"));
+        } else if (dialogue.getText().contains("$$")){ //selena
+            dialogue.setText(dialogue.getText().substring(2, dialogue.getText().length() - 2));
+            dialogue.setTextFill(Color.web("#fa69d8"));
+            box.setStroke(Color.web("#fa69d8"));
+        } else {
+            dialogue.setTextFill(Color.web("#ffcb47"));
+            box.setStroke(Color.web("#ffcb47"));
+        }
+    }
+
 
     public void addDialogues(){
     }
 
     public void addIndexes(){
     }
-    public void decideWhichScene(){
+    public void decideWhichScenes(){
         if (selectedChoice == 1){
-            setNextFXML("SceneTwo.fxml");
+            nextFXML = nextFXML1;
         } else {
-            setNextFXML("SceneTwoTruck.fxml");
+            nextFXML = nextFXML2;
         }
     }
 
 
-    private void switchToHome(ActionEvent e) throws IOException{
+    public void switchToHome(ActionEvent e) throws IOException{
         //loads window
         FXMLLoader fxmlLoader = new FXMLLoader(HomeController.class.getResource(nextFXML));
         //load the scene/window
@@ -200,5 +253,4 @@ public abstract class SceneController {
         new Thread(sleeper).start();
     }
 
-    public abstract void decideWhichScenes();
 }

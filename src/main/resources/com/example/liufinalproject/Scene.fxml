@@ -10,12 +10,12 @@
 
 <AnchorPane minWidth="-Infinity" prefHeight="844.0" prefWidth="1437.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.liufinalproject.SceneController">
    <children>
-      <ImageView fitHeight="844.0" fitWidth="1437.0">
+      <ImageView fx:id="background" fitHeight="844.0" fitWidth="1437.0">
          <image>
             <Image url="@../../../greengirl.png" />
          </image>
       </ImageView>
-      <Rectangle arcWidth="5.0" height="238.0" layoutY="609.0" opacity="0.83" stroke="#ffcb48" strokeType="INSIDE" strokeWidth="2.0" width="1437.0" />
+      <Rectangle fx:id="box" arcWidth="5.0" height="238.0" layoutY="609.0" opacity="0.83" stroke="#ffcb48" strokeType="INSIDE" strokeWidth="2.0" width="1437.0" />
       <Label fx:id="dialogue" layoutX="96.0" layoutY="666.0" prefHeight="91.0" prefWidth="984.0" text="..." textFill="#ffcb47">
          <font>
             <Font name="Times New Roman" size="30.0" />

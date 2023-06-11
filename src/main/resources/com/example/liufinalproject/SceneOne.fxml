@@ -15,10 +15,10 @@
             <Image url="@../../../pxfuel.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcWidth="5.0" height="222.0" layoutX="2.0" layoutY="628.0" opacity="0.83" stroke="#ffcb48" strokeType="INSIDE" strokeWidth="2.0" width="1435.0" />
-      <Label fx:id="dialogue" layoutX="87.0" layoutY="678.0" prefHeight="137.0" prefWidth="942.0" text="..." textFill="#ffcb47">
+      <Rectangle arcWidth="5.0" height="246.0" layoutX="1.0" layoutY="597.0" opacity="0.83" stroke="#ffcb48" strokeType="INSIDE" strokeWidth="2.0" width="1437.0" />
+      <Label fx:id="dialogue" layoutX="85.0" layoutY="648.0" prefHeight="137.0" prefWidth="1140.0" text="..." textFill="#ffcb47">
          <font>
-            <Font name="Times New Roman" size="16.0" />
+            <Font name="Times New Roman" size="21.0" />
          </font>
       </Label>
       <Label layoutX="1231.0" layoutY="783.0" text="Click anywhere to continue..." textFill="#ffc849">
